@@ -1,0 +1,13 @@
+services:
+  ver:
+    build: ./my-app #ファイルの一階層前
+    # image: node:latest #最新の情報をとってくる
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./my-app:/app # yml files 基準のパスを入力する
+
+  db:
+    image: arm64v8/mysql
+    ports:
+      - "3306:3306"
