@@ -8,28 +8,20 @@
       </div>
     </div>
     <div class="content-below-header">
-      <div class="logos">
-      <div class="logo">
-        <img src="@/assets/test1.png" />
-      </div>
       <div class="logo1">
         <img src="@/assets/loga.png" />
       </div>
-      <div class="logo">
-        <img src="@/assets/test2.png" />
-      </div>
     </div>
+    <div>
+      <h1>チェックボックス</h1>
+      <customCheckbox />
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  methods: {
-    login() {},
-    register() {},
-  },
-};
+<script setup>
+import customCheckbox from './components/CustomCheckbox.vue';
+
 </script>
 
 <style>
@@ -44,28 +36,13 @@ export default {
   border-bottom: 1px solid #bbb;
 }
 
-/* .buttons {
-
-} */
-
 .content-below-header {
   display: flex;
   justify-content: center;
   margin-top: 20px;
 }
 
-.logos {
-  display: flex;
-  align-items: center;
-}
-
-.logo img{
-  border-radius: 10px;
-  width: 559px;
-  height: auto;
-}
-
-.logo1 img{
+.logo1 img {
   width: 150px;
   height: auto;
 }
