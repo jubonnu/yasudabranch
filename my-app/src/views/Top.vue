@@ -1,21 +1,8 @@
 <template>
   <div>
-    <!-- ヘッダーのdiv要素。'header'クラスは常に適用され、'is-top'クラスはisTopがtrueの場合に適用されます。 -->
-    <div :class="{'header': true, 'is-top': isTop}">
-      <!-- タイトル表示部分 -->
-      <h1 class="titleColor">Title</h1>
-      <!-- ボタンを含むセクション -->
-      <div class="buttons">
-        <!-- カスタムボタンコンポーネント（ログイン用） -->
-        <custom-button type="Default" />
-        <!-- カスタムボタンコンポーネント（新規登録用） -->
-        <custom-button type="primary" />
-      </div>
-    </div>
-    <!-- サブヘッダーセクション -->
+    <CustomHeader :showButtons="true" :showIcon="false"/>
     <div class="headerSecond">
       <div class="text-content">
-        <!-- イントロダクトリーの文章表示部分 -->
         <h5>
           あなたのキャリアを次のレベルへと導く、画期的な自己分析ツールへようこそ。
         </h5>
@@ -24,31 +11,25 @@
           自己分析が難しく、就職や転職活動が停滞していませんか？文章作成に自信がなく、面接準備に困っている方は多いです。でも、もう心配はいりません。当サービスが、あなたのキャリアを飛躍させるサポートを提供します。
         </p>
         <h2>Title</h2>
-        <!-- アクションボタン -->
         <custom-button type="danger" />
       </div>
-      <!-- ヘッダーイメージ -->
       <img src="@/assets/headerimg.png" class="headerImg" alt="Header Image" />
     </div>
 
-    <!-- メインコンテンツ部分 -->
     <div class="body">
       <h4>サービスの主な特徴</h4>
-      <!-- サービス特徴をリスト表示するコンテナ -->
       <div class="services-container">
         <div
           class="service-row"
           v-for="(serviceRow, rowIndex) in services"
           :key="`row-${rowIndex}`"
         >
-          <!-- 各サービス特徴の詳細 -->
           <div
             class="service-item"
             v-for="(service, columnIndex) in serviceRow"
             :key="`column-${columnIndex}`"
           >
             <div class="icon-background">
-              <!-- サービスアイコン -->
               <img
                 :src="service.icon"
                 :alt="`サービスアイコン${columnIndex}`"
@@ -60,12 +41,10 @@
           </div>
         </div>
       </div>
-      <!-- ユーザーの課題を説明するセクション -->
       <div class="center-content">
         <h3>ユーザーが抱える課題</h3>
         <p>キャリア選択の道は、しばしば不確実性に満ちています。...</p>
       </div>
-      <!-- その他のサービス情報 -->
       <div class="end-content">
         <div
           class="service-item-row"
@@ -96,11 +75,8 @@
           上級の自己分析ツール、高度な履歴書カスタマイズオプション、無制限の面接対策セッションへのアクセスを提供します。
         </p>
       </div>
-      <!-- フッターの呼びかけ文 -->
       <h3 class="footer-announcement">まずは無料登録</h3>
-      <!-- 登録用のカスタムボタン -->
       <custom-button type="orange" />
-      <!-- フッターのナビゲーション部分 -->
       <div class="footer">
         <div class="footer-top">
           <h3>Title</h3>
@@ -125,7 +101,7 @@
 <script setup>
 import CustomButton from "./components/CustomButton.vue";
 import { reactive } from "vue";
-import { ref, onMounted, onUnmounted } from 'vue';
+import CustomHeader from './components/CustomHeader.vue';
 import icon1 from "@/assets/icon1.png";
 import icon2 from "@/assets/icon2.png";
 import icon3 from "@/assets/icon3.png";
@@ -133,7 +109,6 @@ import icon4 from "@/assets/icon4.png";
 import icon5 from "@/assets/icon5.png";
 import icon6 from "@/assets/icon6.png";
 
-// 各サービス項目のデータをreactiveオブジェクトで管理
 const services = reactive([
   [
     {
@@ -222,61 +197,9 @@ const items = reactive([
     points: ["作業効率が大幅UP"],
   },
 ]);
-
-// isTopはリアクティブな参照で、初期値はtrueです。これはヘッダーが最上部にあるかどうかを追跡します。
-const isTop = ref(true);
-
-// handleScrollはスクロールイベントに対するハンドラー関数です。
-// もしwindowのscrollYプロパティが0なら、ユーザーはページの最上部にいると見なし、isTopをtrueに設定します。
-const handleScroll = () => {
-  isTop.value = window.scrollY === 0;
-};
-
-// コンポーネントがマウントされたときに、スクロールイベントリスナーを追加します。
-onMounted(() => {
-  window.addEventListener('scroll', handleScroll);
-});
-
-// コンポーネントがアンマウントされたときに、スクロールイベントリスナーを削除します。
-onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll);
-});
 </script>
 
 <style>
-.header {
-  display: flex; /* 横並びに要素を配置 */
-  align-items: center; /* 中央揃えに */
-  justify-content: space-between; /* 要素間に均等なスペースを確保 */
-  background-color: white; /* 背景色を白に設定 */
-  padding: 10px 100px; /* 上下に10px、左右に100pxのパディングを追加 */
-  text-align: center; /* テキストを中央揃えに */
-  border-bottom: 1px solid #bbb; /* 下部に1pxの境界線を設定 */
-  position: fixed; /* 要素を固定位置に配置 */
-  top: 0; /* トップから0pxの位置 */
-  left: 0; /* 左から0pxの位置 */
-  width: 100%; /* 幅を全体に設定 */
-  z-index: 1000; /* z-indexでレイヤーの優先順位を設定 */
-  transition: top 0.3s;
-}
-
-.is-top {
-  position: absolute; /* 要素をページの通常のフローから取り除き、位置を親要素に対して相対的に設定 */
-  /* このスタイルが適用されると、ヘッダーは固定されず、スクロール時に画面上で動くようになります。
-     これはページが最上部にあるときにのみ適用され、ページをスクロールするとヘッダーが固定位置に留まるように設定されています。 */
-}
-
-/* タイトルのテキスト色を指定 */
-.titleColor {
-  color: #13b1c0; /* ターコイズブルー */
-}
-
-/* ボタンの位置調整 */
-.buttons {
-  display: flex; /* 横並びに配置 */
-  gap: 20px; /* 各ボタン間に20pxの隙間 */
-}
-
 /* ヘッダー第二セクションのスタイル指定 */
 .headerSecond {
   margin-top: 6em; /* 上に6emのマージン */

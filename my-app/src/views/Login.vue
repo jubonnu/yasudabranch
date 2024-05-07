@@ -1,57 +1,120 @@
 <template>
     <div>
-    <div :class="{ header: true, 'is-top': isTop }">
-        <h1 class="titleColor">Title</h1>
+        <CustomHeader :showButtons="false" />
+    <div class="container">
+        <div class="registration-card">
+        <h2 class="title">ログイン</h2>
+        <div class="input-group">
+            <label for="email">メールアドレス</label>
+            <input type="email" id="email" v-model="email" placeholder="メールアドレスを入力してください">
+        </div>
+        <div class="input-group">
+        <label for="password">パスワード</label>
+        <input type="password" id="password" v-model="password" placeholder="パスワードを入力してください">
     </div>
-    <div class="content">
-    <h1>ログイン</h1>
+    <custom-button type="login" />
+        <custom-button type="google" />
+        <custom-button type="x" />
+        <custom-button type="facebook" />
+        <custom-button type="appleId" />
+        <a href="/login" class="login-link">アカウントをお持ちの方はこちら</a>
+        <a href="/login" class="password-link">パスワードをお忘れの方</a>
+        </div>
     </div>
     </div>
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
+import CustomButton from "./components/CustomButton.vue";
+import { ref } from "vue";
+import CustomHeader from './components/CustomHeader.vue';
 
-const isTop = ref(true);
+const email = ref('');
+const password = ref('');
 
-const handleScroll = () => {
-    isTop.value = window.scrollY === 0;
-};
-
-onMounted(() => {
-    window.addEventListener("scroll", handleScroll);
-});
-
-onUnmounted(() => {
-    window.removeEventListener("scroll", handleScroll);
-});
+// const login = () => {
+//     ログイン処理を追加
+// }
 </script>
 
 <style>
-.header {
+
+.container {
     display: flex;
+    justify-content: center;
     align-items: center;
-    justify-content: space-between;
-    background-color: white;
-    padding: 10px 100px;
+  height: 100vh; /* 画面の高さ全体を使う */
+  background-color: #D1EEF0; /* 背景色 */
+}
+
+.registration-card {
+    background: #fff;
+    margin-top: 4rem;
+    padding: 3rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    height: 600px;
+    width: 540px;
     text-align: center;
-    border-bottom: 1px solid #bbb;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    transition: top 0.3s;
+    border-radius: 8px;
 }
 
-.is-top {
-    position: absolute;
-}
-
-.titleColor {
+.title {
+    margin-bottom: 5px;
     color: #13b1c0;
 }
-.content {
-  margin-top: 60px; /* headerの高さに応じて調整 */
+
+.login-link {
+    display: block;
+    margin-top: 5px;
+    color: #f29c5d;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.password-link {
+    display: block;
+    margin-top: 5px;
+    color: #555;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.login-link:hover {
+    text-decoration: underline;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    margin-bottom: 5px;
+}
+
+.input-group label {
+    display: block;
+    margin-top: .5rem;
+    font-size: 1rem;
+    color: #333;
+    text-align: left; 
+    width: 316px; 
+    box-sizing: border-box; 
+    font-size: 14px;
+}
+
+.input-group input[type="email"],
+.input-group input[type="password"] {
+    width: 316px;
+    height: 44px;
+    padding: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.input-group input[type="email"]:focus,
+.input-group input[type="password"]:focus {
+    border-color: #13b1c0;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(19, 177, 192, 0.5);
 }
 </style>

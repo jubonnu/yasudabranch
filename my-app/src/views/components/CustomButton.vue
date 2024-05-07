@@ -1,7 +1,5 @@
 <template>
-  <!-- 条件によって表示するボタンを切り替えるためのdivタグ -->
   <div>
-    <!-- props.typeが'Default'の場合に表示するログインボタン -->
     <el-button
       v-if="props.type === 'Default'"
       class="button-primary"
@@ -9,7 +7,6 @@
       @click="navigateToLogin"
       >ログイン</el-button
     >
-    <!-- props.typeが'primary'の場合に表示する新規登録ボタン -->
     <el-button
       v-if="props.type === 'primary'"
       class="button-primary2"
@@ -17,7 +14,6 @@
       @click="navigateToSignUp"
       >新規登録</el-button
     >
-    <!-- props.typeが'danger'の場合に表示するアクションボタン -->
     <el-button
       v-if="props.type === 'danger'"
       class="button-primary3"
@@ -25,7 +21,6 @@
       @click="navigateToSignUp"
       >今すぐ始める</el-button
     >
-    <!-- props.typeが'orange'の場合に表示するアクションボタン -->
     <el-button
       v-if="props.type === 'orange'"
       class="button-primary4"
@@ -68,16 +63,21 @@
       type="appleId"
       >Apple IDで登録する</el-button
     >
+
+    <el-button
+      v-if="props.type === 'login'"
+      class="button-primary10"
+      type="login"
+      @click="navigateToHome"
+      >ログイン</el-button
+    >
   </div>
 </template>
 
 <script setup>
-// Element Plus のボタンコンポーネントをインポート
 import router from "@/router";
 import { ElButton } from "element-plus";
-// Element Plus のCSSをインポート
 import "element-plus/theme-chalk/index.css";
-// Vue 3 の Composition API から defineProps をインポート
 import { defineProps } from "vue";
 
 function navigateToSignUp() {
@@ -88,7 +88,10 @@ function navigateToLogin() {
   router.push('login')
 }
 
-// propsの定義、typeプロパティがString型でデフォルトは'success'
+function navigateToHome() {
+  router.push('home')
+}
+
 const props = defineProps({
   type: {
     type: String,
@@ -98,20 +101,17 @@ const props = defineProps({
 </script>
 
 <style>
-/* primaryタイプのボタンの基本スタイル */
 .button-primary2 {
   background-color: #56c8cf;
   color: #ffffff !important;
   border: none;
 }
 
-/* primaryタイプのボタンのホバースタイル */
 .button-primary2:hover {
   background-color: #3ba9ab;
   color: #ffffff;
 }
 
-/* dangerタイプのボタンの基本スタイル */
 .button-primary3 {
   background-color: #56c8cf;
   color: #ffffff !important;
@@ -120,13 +120,11 @@ const props = defineProps({
   width: 316px;
 }
 
-/* dangerタイプのボタンのホバースタイル */
 .button-primary3:hover {
   background-color: #3ba9ab;
   color: #ffffff;
 }
 
-/* orangeタイプのボタンの基本スタイル */
 .button-primary4 {
   background-color: #f29c5d;
   color: #ffffff !important;
@@ -135,7 +133,6 @@ const props = defineProps({
   width: 316px;
 }
 
-/* orangeタイプのボタンのホバースタイル */
 .button-primary4:hover {
   background-color: #f3a76d;
   color: #ffffff;
@@ -145,8 +142,9 @@ const props = defineProps({
   background-color: #56c8cf;
   color: #ffffff !important;
   border: none;
-  height: 61px;
+  height: 48px;
   width: 316px;
+  margin-top: 3em;
 }
 
 .button-primary5:hover {
@@ -157,7 +155,7 @@ const props = defineProps({
 .button-primary6 {
   background-color: #ffffff;
   color: #000000 !important;
-  height: 61px;
+  height: 48px;
   width: 316px;
   margin-top: 1em;
 }
@@ -171,7 +169,7 @@ const props = defineProps({
   background-color: #000000;
   color: #ffffff !important;
   border: none;
-  height: 61px;
+  height: 48px;
   width: 316px;
   margin-top: 1em;
 }
@@ -185,7 +183,7 @@ const props = defineProps({
   background-color: #3b5998;
   color: #ffffff !important;
   border: none;
-  height: 61px;
+  height: 48px;
   width: 316px;
   margin-top: 1em;
 }
@@ -199,13 +197,27 @@ const props = defineProps({
   background-color: #000000;
   color: #ffffff !important;
   border: none;
-  height: 61px;
+  height: 48px;
   width: 316px;
   margin-top: 1em;
 }
 
 .button-primary9:hover {
   background-color: #232323;
+  color: #ffffff;
+}
+
+.button-primary10 {
+  background-color: #56c8cf;
+  color: #ffffff !important;
+  border: none;
+  height: 48px;
+  width: 316px;
+  margin-top: 5px;
+}
+
+.button-primary10:hover {
+  background-color: #3ba9ab;
   color: #ffffff;
 }
 </style>
