@@ -56,6 +56,7 @@ onUnmounted(() => {
   }
   .titleColor {
     color: #13b1c0;
+    font-size: 32px;
   }
   .buttons {
     display: flex;

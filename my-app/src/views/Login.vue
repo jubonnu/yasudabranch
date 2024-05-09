@@ -42,17 +42,18 @@ const password = ref('');
 .container {
     display: flex;
     justify-content: center;
-    align-items: center;
-  height: 100vh; /* 画面の高さ全体を使う */
-  background-color: #D1EEF0; /* 背景色 */
+    align-items: flex-start;
+    height: 100vh; 
+    background-color: #F4F8FA; 
+    overflow: auto;
 }
 
 .registration-card {
     background: #fff;
-    margin-top: 4rem;
+    margin-top: 8rem;
     padding: 3rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    height: 600px;
+    min-height: 700px;
     width: 540px;
     text-align: center;
     border-radius: 8px;

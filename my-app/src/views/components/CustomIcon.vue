@@ -3,13 +3,15 @@
     <div class="icon-wrapper" @click="handleEditClick"><el-icon><Edit /></el-icon></div>
     <div class="icon-wrapper" @click="handleSettingClick"><el-icon><Setting /></el-icon></div>
     <div class="icon-wrapper" @click="handleBellClick"><el-icon><Bell /></el-icon></div>
+    <div class="icon-wrapper" @click="handleUserIconClick">
+      <el-avatar :icon="UserFilled" />
+    </div>
   </div>
 </template>
 
 <script setup>
-import { Edit } from '@element-plus/icons-vue';
-import { Setting } from '@element-plus/icons-vue';
-import { Bell } from '@element-plus/icons-vue';
+import { Edit, Setting, Bell } from '@element-plus/icons-vue';
+import { UserFilled } from '@element-plus/icons-vue';
 
 const handleEditClick = () => {
   console.log('EditClick');
@@ -23,6 +25,9 @@ const handleBellClick = () => {
   console.log('BellClick');
 }
 
+const handleUserIconClick = () => {
+  console.log('USerIconClick');
+}
 </script>
 
 <style scoped>
@@ -30,10 +35,11 @@ const handleBellClick = () => {
   font-size: 24px;
   color: gray;
   display: flex;
+  align-items: center;
 }
 
 .icon-wrapper {
   margin-right: 20px;
-  margin-top: 10px;
+  display: flex;
 }
 </style>

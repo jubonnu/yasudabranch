@@ -64,7 +64,7 @@ onUnmounted(() => {
     justify-content: center;
     align-items: center;
     height: 100vh; 
-    background-color: #D1EEF0;
+    background-color: #F4F8FA;
 }
 
 .registration-card {
